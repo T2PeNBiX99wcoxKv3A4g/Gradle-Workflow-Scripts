@@ -46,7 +46,7 @@ def main(new_version: str):
     typer.echo(f"Propertie Name: {propertie_name}")
 
     new_version = new_version.replace('"', '')
-    new_version = new_version[1:] + '\n'
+    new_version = new_version[1:]
     old_version: str = ""
 
     if os.path.isfile(gradle_file_path):
@@ -64,7 +64,7 @@ def main(new_version: str):
                 typer.echo(f'Old version: {old_version}, New version: {new_version}')
                 old_text += line
             old_keyword = f'{propertie_name}={old_version}'
-            new_keyword = f'{propertie_name}={new_version}'
+            new_keyword = f'{propertie_name}={new_version}\n'
             new_text = old_text.replace(old_keyword, new_keyword)
 
             file.seek(0)
