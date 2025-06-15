@@ -25,14 +25,15 @@ def main(new_version: str):
 
     if os.path.isfile(old_config_path):
         with open(old_config_path, 'r+') as file:
-            propertie_name = file.readline()
+            if not propertie_name:
+                propertie_name = file.readline()
             has_old_config = True
             file.close()
 
     if has_old_config:
         yaml_list = {
             "name": propertie_name,
-            "change-readme": False
+            "change-readme": change_readme
         }
 
         os.remove(old_config_path)
