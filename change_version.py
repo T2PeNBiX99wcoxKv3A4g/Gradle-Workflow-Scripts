@@ -46,7 +46,7 @@ def main(new_version: str):
     typer.echo(f"Propertie Name: {propertie_name}")
 
     new_version = new_version.replace('"', '')
-    new_version = new_version[1:]
+    new_version = new_version[1:] + '\n'
     old_version: str = ""
 
     if os.path.isfile(gradle_file_path):
