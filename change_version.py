@@ -11,20 +11,21 @@ readme_file_path: str = './README.md'
 
 def main(new_version: str):
     propertie_name: str = ''
-    rename_readme: bool = False
+    change_readme: bool = False
     has_old_config: bool = False
 
     if os.path.isfile(new_config_path):
         with open(new_config_path, 'r+') as file:
             config = yaml.load(file, Loader=yaml.SafeLoader)
-            propertie_name = config['name']
-            rename_readme = config['change-readme']
+            if 'name' in config:
+                propertie_name = config['name']
+            if 'change-readme' in config:
+                change_readme = config['change-readme']
             file.close()
 
     if os.path.isfile(old_config_path):
         with open(old_config_path, 'r+') as file:
             propertie_name = file.readline()
-            rename_readme = False
             has_old_config = True
             file.close()
 
@@ -70,7 +71,7 @@ def main(new_version: str):
             file.write(new_text)
             file.close()
 
-    if rename_readme and old_version and os.path.isfile(readme_file_path):
+    if change_readme and old_version and os.path.isfile(readme_file_path):
         with open(readme_file_path, 'r+') as file:
             old_text = ""
 
