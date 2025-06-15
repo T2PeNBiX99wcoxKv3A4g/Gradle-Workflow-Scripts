@@ -4,7 +4,7 @@ import typer
 import yaml
 
 old_config_path: str = './.github/change_version.txt'
-new_config_path: str = '.github/change_version.yml'
+new_config_path: str = './.github/change_version.yml'
 gradle_file_path: str = './gradle.properties'
 readme_file_path: str = './README.md'
 
