@@ -60,11 +60,11 @@ def main(new_version: str):
                     old_text += line
                     continue
 
-                old_version = line[start + (len(propertie_name) + 1):len(line)]
+                old_version = line[start + (len(propertie_name) + 1):len(line)].replace('\n', '')
                 typer.echo(f'Old version: {old_version}, New version: {new_version}')
                 old_text += line
             old_keyword = f'{propertie_name}={old_version}'
-            new_keyword = f'{propertie_name}={new_version}\n'
+            new_keyword = f'{propertie_name}={new_version}'
             new_text = old_text.replace(old_keyword, new_keyword)
 
             file.seek(0)
@@ -80,7 +80,6 @@ def main(new_version: str):
                 old_text += line
 
             new_text = old_text.replace(old_version, new_version)
-            typer.echo(new_text)
             file.seek(0)
             file.truncate(0)
             file.write(new_text)
