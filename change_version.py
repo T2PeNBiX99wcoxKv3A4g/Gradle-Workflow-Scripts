@@ -7,11 +7,11 @@ def main(new_version: str):
     typer.echo(f"New version: {new_version}")
 
     propertie_name = ''
-    
+
     with open('./.github/change_version.txt', 'r+') as file:
         propertie_name = file.readline()
         file.close()
-        
+
     typer.echo(f"Propertie Name: {propertie_name}")
 
     with open('./gradle.properties', 'r+') as file:
@@ -23,15 +23,16 @@ def main(new_version: str):
         for line in file.readlines():
             start = line.find(propertie_name)
 
-            if start < 0:
+            if start != 0:
                 old_text += line
                 continue
 
             old_version = line[start + (len(propertie_name) + 1):-1]
             typer.echo(f'Old version: {old_version}, New version: {new_version}')
             old_text += line
-
-        new_text = old_text.replace(old_version, new_version)
+        old_keyword = f'{propertie_name}={old_version}'
+        new_keyword = f'{propertie_name}={new_version}'
+        new_text = old_text.replace(old_keyword, new_keyword)
 
         file.seek(0)
         file.truncate(0)
