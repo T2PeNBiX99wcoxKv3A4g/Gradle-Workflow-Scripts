@@ -60,7 +60,7 @@ def main(new_version: str):
                     old_text += line
                     continue
 
-                old_version = line[start + (len(propertie_name) + 1):-1]
+                old_version = line[start + (len(propertie_name) + 1):len(line)]
                 typer.echo(f'Old version: {old_version}, New version: {new_version}')
                 old_text += line
             old_keyword = f'{propertie_name}={old_version}'
