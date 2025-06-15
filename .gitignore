@@ -1,2 +1,3 @@
 .github/change_version.txt
+.github/change_version.yml
 gradle.properties
